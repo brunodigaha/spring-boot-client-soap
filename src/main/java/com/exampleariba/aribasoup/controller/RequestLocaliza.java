@@ -3,6 +3,7 @@ package com.exampleariba.aribasoup.controller;
 
 import com.exampleariba.aribasoup.config.LocalizaClient;
 import com.exampleariba.aribasoup.config.WSConfigClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.localiza.ws.PollingMessage;
 import com.localiza.ws.PollingRequest;
 import com.localiza.ws.PollingResponse;
@@ -13,7 +14,9 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBElement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RequestLocaliza {
@@ -28,11 +31,19 @@ public class RequestLocaliza {
 //        pollingRequest.getPollingRequestDetails();
 //        pollingRequest.setMessageHeader();
         List<PollingMessage> response = localizaClient.getLocaliza();
+        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
         for(PollingMessage pollingMessage : response){
             System.out.println(pollingMessage.getBusinessPartnerSUITEBulkReplicateRequest()
                     .getBusinessPartnerSUITEReplicateRequestMessage()
                     .get(0).getBusinessPartner().getTaxNumber().get(0).getPartyTaxID().getValue());
+
+            ObjectMapper oMapper = new ObjectMapper();
+            Map<String, Object> mapitem = oMapper.convertValue(pollingMessage, Map.class);
+            map.add(mapitem);
         }
+
+
+        System.out.println("sdf");
     }
 
 }

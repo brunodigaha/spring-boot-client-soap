@@ -45,6 +45,7 @@
 			<scope>test</scope>
 		</dependency>
 
+	<!--mvn spring-boot:run-->
 	</dependencies>
 	<build>
 		<plugins>
