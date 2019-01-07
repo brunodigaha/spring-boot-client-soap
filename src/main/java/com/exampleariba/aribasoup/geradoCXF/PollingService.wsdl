@@ -1,0 +1,2370 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ariba.com/xi/SupplierManagement" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://sap.com/xi/SAPGlobal20/Global" name="PollingClientRequestResponse_Out" targetNamespace="http://ariba.com/xi/SupplierManagement">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ariba.com/xi/SupplierManagement" xmlns="http://sap.com/xi/SAP_BS_FND/MDG/Global2" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://sap.com/xi/SAP_BS_FND/MDG/Global2">
+  <xs:import namespace="http://ariba.com/xi/SupplierManagement" />
+  <xs:element name="OrdinalNumberValue" type="xs:decimal" />
+  <xs:element name="SAPScriptLineFormatCode" type="ns1:SAPScriptLineFormatCode" />
+  <xs:element name="SAPScriptLineText" type="ns1:SAPScriptLineText" />
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ariba.com/xi/SupplierManagement" xmlns="http://sap.com/xi/SAPGlobal20/Global" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://sap.com/xi/SAPGlobal20/Global">
+  <xs:import namespace="http://ariba.com/xi/SupplierManagement" />
+  <xs:element name="BusinessPartnerRelationshipSUITEBulkReplicateRequest" type="ns1:BPRelshpSUITEBulkRplctReqMsg" />
+  <xs:element name="StandardMessageFault" nillable="true" />
+</xs:schema>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ariba.com/xi/SupplierManagement" xmlns:sm="http://ariba.com/xi/SupplierManagement" xmlns:sapg20="http://sap.com/xi/SAPGlobal20/Global" xmlns:mdg="http://sap.com/xi/SAP_BS_FND/MDG/Global2" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ariba.com/xi/SupplierManagement">
+  <xs:import namespace="http://sap.com/xi/SAP_BS_FND/MDG/Global2" />
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" />
+  <xs:element name="BusinessPartnerSUITEBulkReplicateConfirmationMessage" type="tns:BPSUITEBulkRplctConfMsg" />
+  <xs:element name="BusinessPartnerSUITEBulkReplicateRequestMessage" type="tns:BPSUITEBulkRplctReqMsg" />
+  <xs:element name="BusinessPartnerSUITEReplicateConfirmationMessage" type="tns:BPSUITERplctConfMsg" />
+  <xs:element name="BusinessPartnerSUITEReplicateRequestMessage" type="tns:BPSUITERplctReqMsg" />
+  <xs:element name="PollingRequest" type="tns:PollingRequest" />
+  <xs:element name="PollingResponse" type="tns:PollingResponse" />
+  <xs:element name="StandardMessageFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="standard" type="tns:ExchangeFaultData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="PollingRequest">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element maxOccurs="unbounded" name="PollingRequestDetails" type="tns:PollingRequestDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessDocumentMessageHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="tns:BusinessDocumentMessageID" />
+      <xs:element minOccurs="0" name="UUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReferenceID" type="tns:BusinessDocumentMessageID" />
+      <xs:element minOccurs="0" name="ReferenceUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TestDataIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReconciliationIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SenderBusinessSystemID" type="xs:token" />
+      <xs:element minOccurs="0" name="RecipientBusinessSystemID" type="xs:token" />
+      <xs:element minOccurs="0" name="SenderParty" type="tns:BusinessDocumentMessageHeaderParty" />
+      <xs:element minOccurs="0" name="RecipientParty" type="tns:BusinessDocumentMessageHeaderParty" />
+      <xs:element minOccurs="0" name="BusinessScope" type="tns:BusinessScope" />
+    </xs:sequence>
+    <xs:attribute name="BusinessDocumentObjectListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BusinessDocumentMessageID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+        <xs:attribute name="schemeAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="UUID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessDocumentMessageHeaderParty">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="tns:PartyInternalID" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="StandardID" type="tns:PartyStandardID" />
+      <xs:element minOccurs="0" name="ContactPerson" type="tns:BusinessDocumentMessageHeaderPartyContactPerson" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartyInternalID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PartyStandardID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessDocumentMessageHeaderPartyContactPerson">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="tns:ContactPersonInternalID" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="OrganisationFormattedName" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonFormattedName" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PhoneNumber" type="tns:PhoneNumber" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="FaxNumber" type="tns:PhoneNumber" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EmailURI" type="tns:EmailURI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactPersonInternalID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AreaID" type="xs:token" />
+      <xs:element minOccurs="0" name="SubscriberID" type="xs:token" />
+      <xs:element minOccurs="0" name="ExtensionID" type="xs:token" />
+      <xs:element minOccurs="0" name="CountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CountryDiallingCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CountryName" type="tns:MEDIUM_Name" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MEDIUM_Name">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="languageCode" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="EmailURI">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessScope">
+    <xs:sequence>
+      <xs:element name="TypeCode" type="tns:BusinessScopeTypeCode" />
+      <xs:element minOccurs="0" name="InstanceID" type="tns:BusinessScopeInstanceID" />
+      <xs:element minOccurs="0" name="ID" type="tns:BusinessScopeID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessScopeTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessScopeInstanceID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessScopeID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PollingRequestDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InboundServiceName" type="xs:token" />
+    </xs:sequence>
+    <xs:attribute name="timestamp" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PollingResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PollingMessage" type="tns:PollingMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PollingMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BusinessPartnerSUITEBulkReplicateRequest" type="tns:BPSUITEBulkRplctReqMsg" />
+      <xs:element minOccurs="0" name="BusinessPartnerSUITEBulkReplicateConfirmation" type="tns:BPSUITEBulkRplctConfMsg" />
+      <xs:element minOccurs="0" name="BusinessPartnerRelationshipSUITEBulkReplicateRequest" type="tns:BPRelshpSUITEBulkRplctReqMsg" />
+      <xs:element minOccurs="0" name="BusinessPartnerRelationshipSUITEBulkReplicateConfirmation" type="tns:BPRelshpSUITEBulkRplctConfMsg" />
+    </xs:sequence>
+    <xs:attribute name="inboundServiceName" type="xs:string" use="required" />
+    <xs:attribute name="timestamp" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITEBulkRplctReqMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element maxOccurs="unbounded" name="BusinessPartnerSUITEReplicateRequestMessage" type="tns:BPSUITERplctReqMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element name="BusinessPartner" type="tns:BPSUITERplctReqBP" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqBP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="CategoryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ExternalID" type="tns:NOCONVERSION_ObjectID" />
+      <xs:element minOccurs="0" name="NumberRangeIntervalBusinessPartnerGroupCode" type="xs:token" />
+      <xs:element minOccurs="0" name="Customer" type="tns:BPSUITERplctReqCustInfo" />
+      <xs:element minOccurs="0" name="Supplier" type="tns:BPSUITERplctReqSuplr" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AddressInformation" type="tns:BPSUITERplctReqAddrInfo" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="BankDetails" type="tns:BPSUITERplctReqBkDets" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Common" type="tns:BPSUITERplctReqCom" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Role" type="tns:BPSUITERplctReqRole" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Identification" type="tns:BPSUITERplctReqIdn" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="IndustrySector" type="tns:BPSUITERplctReqIndstrySectr" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TaxNumber" type="tns:BPSUITERplctReqTxNo" />
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="GenericCustomField" type="tns:GenericCustomField" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="changeOrdinalNumberValue" type="xs:decimal" />
+    <xs:attribute name="reconciliationPeriodCounterValue" type="xs:int" />
+    <xs:attribute name="addressInformationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="bankDetailsListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="commonListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="roleListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="identificationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="industrySectorListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="taxNumberListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute ref="tns:genericCustomFieldListCompleteTransmissionIndicator" />
+  </xs:complexType>
+  <xs:complexType name="NOCONVERSION_ObjectID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeVersionID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="MaintenanceProfileCode" type="tns:BusinessPartnerMaintenanceProfileCode" />
+      <xs:element minOccurs="0" name="AuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="ExpressTrainStationLocationName" type="xs:string" />
+      <xs:element minOccurs="0" name="TrainStationLocationName" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerPartyWithFiscalAddressInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverCustomerPartyWithFiscalAddressInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="AlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverAlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="AlternativePayeeAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CorporateGroupName" type="xs:string" />
+      <xs:element minOccurs="0" name="StandardPointLocationCode" type="xs:string" />
+      <xs:element minOccurs="0" name="DeletionBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CountyCode" type="tns:CountyCode" />
+      <xs:element minOccurs="0" name="CityCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PostingBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EqualizationTaxRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValueAddedTaxRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TradingPartnerCompanyID" type="tns:CompanyID" />
+      <xs:element minOccurs="0" name="TaxGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ICMSExemptionIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IPIExemptionIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaxSubstitutionGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CFOPCategoryCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SaleSalesAndDistributionBlocks" type="tns:BPSUITERplctReqSalesAndDistrBlocks" />
+      <xs:element minOccurs="0" name="IndustrySector" type="tns:BPSUITERplctReqCustIndstrySectr" />
+      <xs:element minOccurs="0" name="MarketingAttributes" type="tns:BPSUITERplctReqMktgAttribs" />
+      <xs:element minOccurs="0" name="CustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="FirstAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SecondAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ThirdAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="FourthAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="FifthAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SixthAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SeventhAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="EighthAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="NinthAdditionalCustomerExtensionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DataMediumExchangeReportCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DataMediumExchangeInstructionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CivilUseIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MilitaryUseIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LegalControlIndicators" type="tns:BPSUITERplctReqLegalCtrlInds" />
+      <xs:element minOccurs="0" name="PriceSpecifications" type="tns:BPSUITERplctReqPrSpecs" />
+      <xs:element minOccurs="0" name="RepresentativeName" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinessTypeName" type="xs:string" />
+      <xs:element minOccurs="0" name="IndustryTypeName" type="xs:string" />
+      <xs:element minOccurs="0" name="RelatedSupplierInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverRelatedSupplierInternalID" type="xs:token" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountingInformation" type="tns:BPSUITERplctReqCustAcctgInfo" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SalesArrangement" type="tns:BPSUITERplctReqSlsArrgmt" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="UnloadingPoints" type="tns:BPSUITERplctReqCustUnldgPts" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TaxClassification" type="tns:BPSUITERplctReqCustTaxClass" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TaxGrouping" type="tns:BPSUITERplctReqCustTxGrpg" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomerText" type="tns:BPSUITERplctReqText" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomerDocument" type="tns:BPSUITERplctReqDoc" />
+    </xs:sequence>
+    <xs:attribute name="accountingInformationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="salesArrangementListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="unloadingPointsListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="taxClassificationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="taxGroupingListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="customerTextListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BusinessPartnerMaintenanceProfileCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AuthorisationGroupCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CountyCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Code">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CompanyID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqSalesAndDistrBlocks">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="BillingBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="DeliveryBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="SalesSupportBlockedIndicator" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustIndstrySectr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IndustrialSectorCode" type="tns:IndustrialSectorCode" />
+      <xs:element minOccurs="0" name="FirstAdditionalIndustrialSectorCode" type="tns:IndustrialSectorCode" />
+      <xs:element minOccurs="0" name="SecondAdditionalIndustrialSectorCode" type="tns:IndustrialSectorCode" />
+      <xs:element minOccurs="0" name="ThirdAdditionalIndustrialSectorCode" type="tns:IndustrialSectorCode" />
+      <xs:element minOccurs="0" name="FourthAdditionalIndustrialSectorCode" type="tns:IndustrialSectorCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IndustrialSectorCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqMktgAttribs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerGroupCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CustomerNielsenRegionCode" type="tns:NielsenRegionCode" />
+      <xs:element minOccurs="0" name="FiscalYearVariantCode" type="xs:token" />
+      <xs:element minOccurs="0" name="AnnualSalesVolumeAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="AnnualSalesVolumeAmountReportedYear" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeNumberValue" type="xs:int" />
+      <xs:element minOccurs="0" name="EmployeeNumberValueReportedYear" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NielsenRegionCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Amount">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="currencyCode" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqLegalCtrlInds">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BiochemicalWarfareIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NuclearNonproliferationIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NationalSecurityIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MissileTechnologyIndicator" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqPrSpecs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerConditionGroupCode" type="tns:PriceSpecificationCustomerGroupCode" />
+      <xs:element minOccurs="0" name="FirstAdditionalCustomerConditionGroupCode" type="tns:PriceSpecificationCustomerGroupCode" />
+      <xs:element minOccurs="0" name="SecondAdditionalCustomerConditionGroupCode" type="tns:PriceSpecificationCustomerGroupCode" />
+      <xs:element minOccurs="0" name="ThirdAdditionalCustomerConditionGroupCode" type="tns:PriceSpecificationCustomerGroupCode" />
+      <xs:element minOccurs="0" name="FourthAdditionalCustomerConditionGroupCode" type="tns:PriceSpecificationCustomerGroupCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PriceSpecificationCustomerGroupCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustAcctgInfo">
+    <xs:sequence>
+      <xs:element name="CompanyID" type="xs:token" />
+      <xs:element minOccurs="0" name="EmployeeID" type="tns:EmployeeID" />
+      <xs:element minOccurs="0" name="BlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SortCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="AccountingClerkInitialsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="GeneralLedgerAccountReference" type="tns:GeneralLedgerAccountReference" />
+      <xs:element minOccurs="0" name="AuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="HeadOfficeAccountInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverHeadOfficeAccountInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="AlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverAlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="PaymentNoticeCustomerClearedItemsIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentNoticeSalesDepartmentIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentNoticeLegalDepartmentIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentNoticeAccountingIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentNoticeCustomerWithoutClearedItemsIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentMethodsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CustomerSupplierClearingIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentBlockCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CashDiscountTermsCode" type="tns:CashDiscountTermsCode" />
+      <xs:element minOccurs="0" name="BillOfExchangeChargesCashDiscountTermsCode" type="tns:CashDiscountTermsCode" />
+      <xs:element minOccurs="0" name="InterestCalculationInclusionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LastInterestCalculationKeyDate" type="xs:date" />
+      <xs:element minOccurs="0" name="InterestCalculationFrequencyCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DebtorPartyCreditorID" type="xs:token" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyName" type="tns:MEDIUM_Name" />
+      <xs:element minOccurs="0" name="Note" type="xs:string" />
+      <xs:element minOccurs="0" name="PlanningGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ExportCreditInsuranceInstitutionID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="InsuredAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="InsuranceLeadDuration" type="xs:string" />
+      <xs:element minOccurs="0" name="DeductiblePercent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InsuranceID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="InsuranceValidityDate" type="xs:date" />
+      <xs:element minOccurs="0" name="CollectiveInvoiceVariantID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="LocalProcessingIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PeriodicAccountStatementsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="BillOfExchangeLimitAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="NextPayeeInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverNextPayeeInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="LastInterestCalculationRunDate" type="xs:date" />
+      <xs:element minOccurs="0" name="RecordPaymentHistoryIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BusinessPartnerToleranceGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ProbableCheckPaidDuration" type="xs:string" />
+      <xs:element minOccurs="0" name="HouseBankInternalID" type="tns:BankInternalID" />
+      <xs:element minOccurs="0" name="PayItemsSeparatelyIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReductionRatesDeterminationCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PreviousCustomerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="PaymentGroupingCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LeaveReasonCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DunningNoticeGroupingCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LockboxCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PaymentMethodSupplementCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="BuyingGroupInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverBuyingGroupInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="PaymentAdvicesSelectionRuleCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PaymentAdvicesByEDIIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReleaseApprovalGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ConversionVersionReasonCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyTelephoneFormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyFaxFormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyWebAddress" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="CreditMemosPaymentTermsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ValueAdjustmentCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DeletionBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AccountsReceivablePledgingCode" type="tns:Code" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="DunningInformation" type="tns:BPSUITERplctReqDunInfo" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WithholdingTax" type="tns:BPSUITERplctReqCustWhldgTx" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountingText" type="tns:BPSUITERplctReqText" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="dunningInformationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="withholdingTaxListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="accountingTextListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="EmployeeID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="GeneralLedgerAccountReference">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:token" />
+      <xs:element minOccurs="0" name="ChartOfAccountsID" type="tns:ChartOfAccountsID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChartOfAccountsID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CashDiscountTermsCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Identifier">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeVersionID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+        <xs:attribute name="schemeAgencySchemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BankInternalID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqDunInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DunningAreaID" type="tns:Code" />
+      <xs:element name="DunningProcedureCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DunningBlockCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LastDunningNoticeDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DunningLevelCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DunningRecipientID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverDunningRecipientID" type="xs:token" />
+      <xs:element minOccurs="0" name="LegalDunningProceedingsDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DunningClerkInitialsCode" type="tns:Code" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustWhldgTx">
+    <xs:sequence>
+      <xs:element name="WithholdingTaxTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxIdentificationNumber" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxAgentIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WithholdingTaxObligationPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CLOSED_DatePeriod">
+    <xs:sequence>
+      <xs:element name="StartDate" type="xs:date" />
+      <xs:element name="EndDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqText">
+    <xs:sequence>
+      <xs:element name="TextTypeCode" type="tns:TextCollectionTextTypeCode" />
+      <xs:element name="LanguageCode" type="xs:language" />
+      <xs:element maxOccurs="unbounded" name="TextSAPScriptLine" type="tns:BPSUITERplctReqTextSAPScriptLine" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="textSAPScriptLineListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="TextCollectionTextTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqTextSAPScriptLine">
+    <xs:sequence>
+      <xs:element ref="mdg:OrdinalNumberValue" />
+      <xs:element minOccurs="0" ref="mdg:SAPScriptLineFormatCode" />
+      <xs:element ref="mdg:SAPScriptLineText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SAPScriptLineFormatCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SAPScriptLineText">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqSlsArrgmt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SalesOrganisationID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverSalesOrganisationID" type="xs:token" />
+      <xs:element minOccurs="0" name="OrganisationalCentreID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverOrganisationalCentreID" type="xs:token" />
+      <xs:element minOccurs="0" name="DistributionChannelCode" type="tns:DistributionChannelCode" />
+      <xs:element minOccurs="0" name="DivisionCode" type="tns:DivisionCode" />
+      <xs:element minOccurs="0" name="AuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StatisticsGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="OrderBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="PricingProcedureDeterminationCode" type="xs:token" />
+      <xs:element minOccurs="0" name="GroupCode" type="xs:token" />
+      <xs:element minOccurs="0" name="SalesDistrictCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PriceGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PriceListTypeCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ItemOrderProbabilityNumberValue" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="BatchSplitAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SellerPartyBuyerID" type="xs:token" />
+      <xs:element minOccurs="0" name="TransportServiceLevelCode" type="xs:token" />
+      <xs:element minOccurs="0" name="BillingBlockingReasonCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ManualInvoiceMaintenanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InvoiceDatesCalendarCode" type="tns:WorkingDayCalendarCode" />
+      <xs:element minOccurs="0" name="IncoiceListScheduleCalendarCode" type="tns:WorkingDayCalendarCode" />
+      <xs:element minOccurs="0" name="CurrencyCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ABCClassificationCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="AccountAssignmentGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CashDiscountTermsCode" type="tns:CashDiscountTermsCode" />
+      <xs:element minOccurs="0" name="DeliveringPlantID" type="tns:PlantID" />
+      <xs:element minOccurs="0" name="SalesGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SalesOfficeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ProductProposalID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="CustomerDefinedGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="FirstAdditionalCustomerDefinedGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SecondAdditionalCustomerDefinedGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ThirdAdditionalCustomerDefinedGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="FourthAdditionalCustomerDefinedGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="RebateRelevantIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExchangeRateTypeCode" type="tns:ExchangeRateTypeCode" />
+      <xs:element minOccurs="0" name="PricingRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentGuaranteeProcedureCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CreditControlAreaCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SalesSupportBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RoundingSwitchOffIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AgencyBusinessRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MeasureUnitGroupCode" type="tns:MeasureUnitGroupCode" />
+      <xs:element minOccurs="0" name="ProductProposalCustomerProcedureCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PODRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PODConfirmationTimeframeDuration" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentIndexAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeliveryTerms" type="tns:BPSUITERplctReqDelivTrms" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PartnerFunctions" type="tns:BPSUITERplctReqCustPartFuncs" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SalesArrangementText" type="tns:BPSUITERplctReqText" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="partnerFunctionsListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="salesArrangementTextListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DistributionChannelCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DivisionCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="WorkingDayCalendarCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PlantID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ExchangeRateTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MeasureUnitGroupCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqDelivTrms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeliveryPriorityCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="Incoterms" type="tns:Incoterms" />
+      <xs:element minOccurs="0" name="SalesOrderCompleteDeliveryIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderCombinationAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PartialDeliveryControlCode" type="xs:token" />
+      <xs:element minOccurs="0" name="PartialDeliveryMaximumNumberValue" type="xs:int" />
+      <xs:element minOccurs="0" name="QuantityTolerance" type="tns:QuantityTolerance" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Incoterms">
+    <xs:sequence>
+      <xs:element name="ClassificationCode" type="xs:token" />
+      <xs:element minOccurs="0" name="TransferLocationName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QuantityTolerance">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OverPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OverPercentUnlimitedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UnderPercent" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustPartFuncs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PartyRoleCode" type="xs:token" />
+      <xs:element minOccurs="0" name="PartyInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverPartyInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PartnerDescription" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustUnldgPts">
+    <xs:sequence>
+      <xs:element name="UnloadingPointName" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BusinessHours" type="tns:BPSUITERplctReqBusHrs" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqBusHrs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FactoryCalenderCode" type="tns:WorkingDayCalendarCode" />
+      <xs:element minOccurs="0" name="TimeZoneCode" type="xs:token" />
+      <xs:element minOccurs="0" name="MondayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="MondayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="MondayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="MondayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="TuesdayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="TuesdayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="TuesdayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="TuesdayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="WednesdayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="WednesdayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="WednesdayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="WednesdayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="ThursdayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="ThursdayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="ThursdayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="ThursdayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="FridayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="FridayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="FridayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="FridayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SaturdayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SaturdayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SaturdayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SaturdayPMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SundayAMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SundayAMEndTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SundayPMStartTime" type="xs:time" />
+      <xs:element minOccurs="0" name="SundayPMEndTime" type="xs:time" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustTaxClass">
+    <xs:sequence>
+      <xs:element name="TaxCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="TaxTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="TaxGroupCode" type="tns:Code" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCustTxGrpg">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TaxCodeCategoryIndicator" type="tns:Code" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="TaxExemption" type="tns:BPSUITERplctReqTxExmp" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqTxExmp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CertificateID" type="tns:TaxExemptionCertificateID" />
+      <xs:element minOccurs="0" name="Percent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaxExemptionCertificateID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+        <xs:attribute name="schemeAgencySchemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqDoc">
+    <xs:sequence>
+      <xs:element name="DocumentTypeCode" type="tns:DocumentTypeCode" />
+      <xs:element name="DocumentID" type="tns:DocumentID" />
+      <xs:element name="AlternativeDocumentID" type="xs:token" />
+      <xs:element name="DocumentVersionID" type="xs:token" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DocumentTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DocumentID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqSuplr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="CreditorInformationNumber" type="xs:token" />
+      <xs:element minOccurs="0" name="MaintenanceProfileCode" type="tns:BusinessPartnerMaintenanceProfileCode" />
+      <xs:element minOccurs="0" name="ProcurementTransactionBlockingCode" type="tns:SupplierProcurementTransactionBlockingCode" />
+      <xs:element minOccurs="0" name="DeletionBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PostingBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PurchasingBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TradingPartnerCompanyID" type="tns:CompanyID" />
+      <xs:element minOccurs="0" name="ManufacturerPartyID" type="xs:token" />
+      <xs:element minOccurs="0" name="AuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="CorporateGroupName" type="xs:string" />
+      <xs:element minOccurs="0" name="ProofOfDeliveryRequirementCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CreditDataLastCheckDate" type="xs:date" />
+      <xs:element minOccurs="0" name="TrainStationLocationName" type="xs:string" />
+      <xs:element minOccurs="0" name="DataMediumExchangeReportCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DataMediumExchangeInstructionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="InpaymentSlipWithReferenceNumberSubscriberID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="AlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverAlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="AlternativePayeeAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EqualizationTaxRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValueAddedTaxRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FiscalAddressPartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverFiscalAddressPartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="SupplyingPlantID" type="tns:PlantID" />
+      <xs:element minOccurs="0" name="SellerAssortmentProductGroupLevelRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PlantLevelRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WorkingDayCalendarCode" type="tns:WorkingDayCalendarCode" />
+      <xs:element minOccurs="0" name="CarrierPartyStandardID" type="tns:PartyStandardID" />
+      <xs:element minOccurs="0" name="CarrierPartyFreightGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ServicePerformerPartyGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="StatisticsGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="TaxAuthorityPartyID" type="xs:token" />
+      <xs:element minOccurs="0" name="TaxGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SocialInsuranceActivityCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ForSocialInsuranceRegisteredIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaxSplitIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaxBasePercentageCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ResponsibleTaxOfficePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverResponsibleTaxOfficePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="RepresentativeName" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinessTypeName" type="xs:string" />
+      <xs:element minOccurs="0" name="IndustryTypeName" type="xs:string" />
+      <xs:element minOccurs="0" name="RelatedCustomerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverRelatedCustomerInternalID" type="xs:token" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountingInformation" type="tns:BPSUITERplctReqAcctgInfo" />
+      <xs:element minOccurs="0" name="BiddingCharacteristic" type="tns:BPSUITERplctReqBiddingCharc" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ProcurementCardIssuingInstitutes" type="tns:BPSUITERplctReqProcmtCardIssuingInstitutes" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="QualityManagement" type="tns:BPSUITERplctReqQltyMgmt" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ProcurementArrangement" type="tns:BPSUITERplctReqProcmtArrgmt" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SubRange" type="tns:BPSUITERplctReqSubRnge" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TaxGrouping" type="tns:BPSUITERplctReqTxGrpg" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SupplierText" type="tns:BPSUITERplctReqText" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SupplierDocument" type="tns:BPSUITERplctReqDoc" />
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="GenericCustomField" type="tns:GenericCustomField" />
+    </xs:sequence>
+    <xs:attribute name="accountingInformationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="biddingCharacteristicListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="procurementCardIssuingInstitutesListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="qualitiyManagementListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="procurementArrangementListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="subRangeListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="taxGroupingListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="supplierTextListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute ref="tns:genericCustomFieldListCompleteTransmissionIndicator" />
+  </xs:complexType>
+  <xs:complexType name="SupplierProcurementTransactionBlockingCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAcctgInfo">
+    <xs:sequence>
+      <xs:element name="CompanyID" type="xs:token" />
+      <xs:element minOccurs="0" name="BlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SortCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="GeneralLedgerAccountReference" type="tns:GeneralLedgerAccountReference" />
+      <xs:element minOccurs="0" name="AuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="InterestCalculationInclusionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="InterestCalculationFrequencyCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LastInterestCalculationKeyDate" type="xs:date" />
+      <xs:element minOccurs="0" name="LastInterestCalculationRunDate" type="xs:date" />
+      <xs:element minOccurs="0" name="PaymentMethodsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PaymentBlockCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CashDiscountTermsCode" type="tns:CashDiscountTermsCode" />
+      <xs:element minOccurs="0" name="LocalProcessingIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AccountingClerkInitialsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DebtorPartyCreditorID" type="xs:token" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyName" type="tns:MEDIUM_Name" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyFaxFormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyTelephoneFormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeResponsiblePartyWebAddress" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="Note" type="xs:string" />
+      <xs:element minOccurs="0" name="PlanningGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="HeadOfficeAccountInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverHeadOfficeAccountInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="AlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="ReceiverAlternativePayeePartyInternalID" type="tns:PartyInternalID" />
+      <xs:element minOccurs="0" name="BillOfExchangeLimitAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="ProbableCheckPaidDuration" type="xs:string" />
+      <xs:element minOccurs="0" name="DoubleEntriesCheckIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BusinessPartnerToleranceGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="HouseBankInternalID" type="tns:BankInternalID" />
+      <xs:element minOccurs="0" name="PayItemsSeparatelyIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionCertificateID" type="tns:TaxExemptionCertificateID" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionCertificateValidityDate" type="xs:date" />
+      <xs:element minOccurs="0" name="WithholdingTaxTypeCode" type="tns:TaxTypeCode" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionReasonCode" type="tns:TaxExemptionReasonCode" />
+      <xs:element minOccurs="0" name="WithholdingTaxCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="VendorRecipientTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="ReductionRatesDeterminationCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="MinorityIndicatorsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PreviousSupplierInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="EmployeeID" type="tns:EmployeeID" />
+      <xs:element minOccurs="0" name="PaymentGroupingCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PaymentMethodSupplementCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PaymentAdvicesByEDIIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReleaseApprovalGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="InvoiceVerificationToleranceGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CreditMemosPaymentTermsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PeriodicAccountStatementsCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="CertificationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DeletionBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CustomerSupplierClearingIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DunningNoticeGroupingCode" type="tns:Code" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="DunningInformation" type="tns:BPSUITERplctReqDunInfo" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WithholdingTax" type="tns:BPSUITERplctReqWhldgTx" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountingText" type="tns:BPSUITERplctReqText" />
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="GenericCustomField" type="tns:GenericCustomField" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="dunningInformationListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="withholdingTaxListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="accountingTextListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute ref="tns:genericCustomFieldListCompleteTransmissionIndicator" />
+  </xs:complexType>
+  <xs:complexType name="TaxTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TaxExemptionReasonCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqWhldgTx">
+    <xs:sequence>
+      <xs:element name="WithholdingTaxTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SubjectToWithholdingTaxIndicator" type="tns:Code" />
+      <xs:element minOccurs="0" name="VendorRecipientTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxIdentificationNumber" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionCertificateID" type="tns:Code" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionRate" type="tns:Amount" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="WithholdingTaxExemptionReasonCode" type="tns:Code" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GenericCustomField">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="type" type="tns:GenericCustomFieldType" />
+        <xs:attribute name="title" type="xs:string" />
+        <xs:attribute name="description" type="xs:string" />
+        <xs:attribute name="languageCode" type="xs:string" />
+        <xs:attribute name="table" type="xs:string" />
+        <xs:attribute name="field" type="xs:string" />
+        <xs:attribute name="checkTable" type="xs:string" />
+        <xs:attribute name="receiverTable" type="xs:string" />
+        <xs:attribute name="receiverField" type="xs:string" />
+        <xs:attribute name="receiverCheckTable" type="xs:string" />
+        <xs:attribute name="maxLength" type="xs:int" />
+        <xs:attribute name="minLength" type="xs:int" />
+        <xs:attribute name="pattern" type="xs:string" />
+        <xs:attribute name="totalDigits" type="xs:int" />
+        <xs:attribute name="fractionDigits" type="xs:int" />
+        <xs:attribute name="maxInclusive" type="xs:decimal" />
+        <xs:attribute name="minInclusive" type="xs:decimal" />
+        <xs:attribute name="displayRestrictions" type="xs:string" />
+        <xs:attribute name="editRestrictions" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqBiddingCharc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MinorityOwnedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MinorityOwnedCertificateExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="WomenOwnedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WomenOwnedCertificateExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="SurrogateBiddingAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OfflineBiddingIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqProcmtCardIssuingInstitutes">
+    <xs:sequence>
+      <xs:element name="PaymentCardIssuerPartyInternalID" type="tns:PartyInternalID" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqQltyMgmt">
+    <xs:sequence>
+      <xs:element name="SystemStandardCode" type="tns:QualityManagementSystemStandardCode" />
+      <xs:element minOccurs="0" name="SystemStandardCodeExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="QualityManagementSystemStandardCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqProcmtArrgmt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReceiverPurchasingOrganisationID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverOrganisationalCentreID" type="xs:token" />
+      <xs:element minOccurs="0" name="PurchasingOrganisationID" type="xs:token" />
+      <xs:element minOccurs="0" name="OrganisationalCentreID" type="xs:token" />
+      <xs:element minOccurs="0" name="SupplyingPlantID" type="tns:PlantID" />
+      <xs:element minOccurs="0" name="VendorSubrangeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PurchasingGroupID" type="xs:token" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SupplierABCClassificationCode" type="tns:SupplierABCClassificationCode" />
+      <xs:element minOccurs="0" name="SellerPartyContactPersonName" type="xs:string" />
+      <xs:element minOccurs="0" name="MRPControllerCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PurchasingTerms" type="tns:BPSUITERplctReqPurgTrms" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PartnerFunctions" type="tns:BPSUITERplctReqPartFuncs" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PurchasingText" type="tns:BPSUITERplctReqText" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="purchasingTermsListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="partnerFunctionsListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="purchasingTextListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="SupplierABCClassificationCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqPurgTrms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomsOfficeInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="BuyerPartySellerID" type="xs:token" />
+      <xs:element minOccurs="0" name="PurchaseOrderCurrencyCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CashDiscountTermsCode" type="tns:CashDiscountTermsCode" />
+      <xs:element minOccurs="0" name="ReturnItemsEvaluatedReceiptSettlementIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TransportModeCode" type="xs:token" />
+      <xs:element minOccurs="0" name="TransportServiceLevelCode" type="xs:token" />
+      <xs:element minOccurs="0" name="PriceSpecificationSupplierGroupCode" type="tns:PriceSpecificationSupplierGroupCode" />
+      <xs:element minOccurs="0" name="PriceSpecificationDeterminationDateTypeCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ExpectedPurchasingDocumentItemConfirmationTypeCode" type="tns:PurchasingDocumentItemConfirmationTypeCode" />
+      <xs:element minOccurs="0" name="MeasureUnitGroupCode" type="tns:MeasureUnitGroupCode" />
+      <xs:element minOccurs="0" name="RoundingProfileCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DeliveryCyclePlanningCalendarCode" type="tns:PlanningCalendarCode" />
+      <xs:element minOccurs="0" name="PlanningCyclePlanningCalendarCode" type="tns:PlanningCalendarCode" />
+      <xs:element minOccurs="0" name="GoodsMovementItemSortCriterionCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="LoadBuildingRestrictionProfileCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DataTransferProfileCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="PurchasingBlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeliveryBasedInvoiceVerificationIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EvaluatedReceiptSettlementIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AutomaticPurchaseOrderGenerationAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PurchaseOrderBySupplierProvidedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DiscountInKindAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IndexCompilationForSubsequentSettlementAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DocumentIndexAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AgencyBusinessRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RevaluationAllowedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServiceBasedInvoiceVerificationIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubsequentSettlementApplyIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BusinessVolumeComparisonRequiredIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PricingRelevanceIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RackJobbingIncludedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PriceMakingAgreementTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="OrderMinimumAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="PlannedDeliveryDuration" type="xs:string" />
+      <xs:element minOccurs="0" name="SalesVolumeFulfillmentPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PurchaseOrderConfirmationRequirementCode" type="xs:token" />
+      <xs:element minOccurs="0" name="InvoiceConfirmationRequirementCode" type="xs:token" />
+      <xs:element minOccurs="0" name="FollowUpDespatchedDeliveryNotificationRequirementCode" type="xs:token" />
+      <xs:element minOccurs="0" name="FollowUpGoodsReceiptRequestRequirementCode" type="xs:token" />
+      <xs:element minOccurs="0" name="Incoterms" type="tns:Incoterms" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PriceSpecificationSupplierGroupCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PurchasingDocumentItemConfirmationTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PlanningCalendarCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqPartFuncs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PartyRoleCode" type="xs:token" />
+      <xs:element minOccurs="0" name="PartyInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverPartyInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqSubRnge">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="VendorSubrangeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="SubrangeDescription" type="tns:LEN20_Description" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LEN20_Description">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="languageCode" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqTxGrpg">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TaxCodeCategoryIndicator" type="tns:Code" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReceiverUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="UUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="MoveDestinationAddressReceiverUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="MoveDestinationAddressUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="MoveDate" type="xs:date" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AddressUsage" type="tns:BPSUITERplctReqAddrInfoAddrUsge" />
+      <xs:element name="Address" type="tns:BPSUITERplctReqAddrInfoAddr" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="addressUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrUsge">
+    <xs:sequence>
+      <xs:element name="AddressUsageCode" type="tns:AddressUsageCode" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="AddressUsageCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddr">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AddressNote" type="tns:BPSUITERplctReqNote" />
+      <xs:element minOccurs="0" name="CommunicationPreference" type="tns:BPSUITERplctReqAddrInfoAddrCommPref" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Email" type="tns:BPSUITERplctReqAddrInfoAddrEml" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Facsimile" type="tns:BPSUITERplctReqAddrInfoAddrFacs" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="OrganisationName" type="tns:BPSUITERplctReqAddrInfoAddrOrgName" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonName" type="tns:BPSUITERplctReqAddrInfoAddrPersnName" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PostalAddress" type="tns:BPSUITERplctReqAddrInfoAddrPostlAddr" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Telephone" type="tns:BPSUITERplctReqAddrInfoAddrTel" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Web" type="tns:BPSUITERplctReqAddrInfoAddrWeb" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="addressNoteListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="emailListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="facsimileListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="organisationNameListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="personNameListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="postalAddressListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="telephoneListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="webListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqNote">
+    <xs:sequence>
+      <xs:element name="Note" type="tns:Note" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Note">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="languageCode" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrCommPref">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorrespondenceLanguageCode" type="xs:language" />
+      <xs:element minOccurs="0" name="PreferredCommunicationMediumTypeCode" type="tns:CommunicationMediumTypeCode" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CommunicationMediumTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrEml">
+    <xs:sequence>
+      <xs:element name="URI" type="tns:EmailURI" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="TransportNeutralEncapsulationFormatEnabledIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EmailNote" type="tns:BPSUITERplctReqNote" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EmailUsage" type="tns:BPSUITERplctReqAddrInfoAddrEmlUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="eMailNoteListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="eMailUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrEmlUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CommunicationAddressUsage">
+    <xs:sequence>
+      <xs:element name="Code" type="tns:CommunicationAddressUsageCode" />
+      <xs:element minOccurs="0" name="Name" type="tns:MEDIUM_Name" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CommunicationAddressUsageCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrFacs">
+    <xs:sequence>
+      <xs:element name="Number" type="tns:PhoneNumber" />
+      <xs:element minOccurs="0" name="FormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="FacsimileNote" type="tns:BPSUITERplctReqNote" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="FacsimileUsage" type="tns:BPSUITERplctReqAddrInfoAddrFacsUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="facsimileNoteListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="facsimileUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrFacsUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrOrgName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressRepresentationCode" type="tns:AddressRepresentationCode" />
+      <xs:element name="Name" type="tns:OrganisationName" />
+      <xs:element minOccurs="0" name="KeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalKeyWordsText" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="AddressRepresentationCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OrganisationName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormOfAddressCode" type="tns:FormOfAddressCode" />
+      <xs:element minOccurs="0" name="FirstLineName" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondLineName" type="xs:string" />
+      <xs:element minOccurs="0" name="ThirdLineName" type="xs:string" />
+      <xs:element minOccurs="0" name="FourthLineName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FormOfAddressCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrPersnName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressRepresentationCode" type="tns:AddressRepresentationCode" />
+      <xs:element name="Name" type="tns:PersonName" />
+      <xs:element minOccurs="0" name="KeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalKeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="FormattedName" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PersonName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormOfAddressCode" type="tns:FormOfAddressCode" />
+      <xs:element minOccurs="0" name="FormOfAddressName" type="xs:string" />
+      <xs:element minOccurs="0" name="GivenName" type="xs:string" />
+      <xs:element minOccurs="0" name="MiddleName" type="xs:string" />
+      <xs:element minOccurs="0" name="FamilyName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalFamilyName" type="xs:string" />
+      <xs:element minOccurs="0" name="BirthName" type="xs:string" />
+      <xs:element minOccurs="0" name="NickName" type="xs:string" />
+      <xs:element minOccurs="0" name="InitialsName" type="xs:string" />
+      <xs:element minOccurs="0" name="AcademicTitleCode" type="tns:AcademicTitleCode" />
+      <xs:element minOccurs="0" name="AcademicTitleName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalAcademicTitleCode" type="tns:AcademicTitleCode" />
+      <xs:element minOccurs="0" name="AdditionalAcademicTitleName" type="xs:string" />
+      <xs:element minOccurs="0" name="NamePrefixCode" type="tns:FamilyNamePrefixCode" />
+      <xs:element minOccurs="0" name="NamePrefixName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalNamePrefixCode" type="tns:FamilyNamePrefixCode" />
+      <xs:element minOccurs="0" name="AdditionalNamePrefixName" type="xs:string" />
+      <xs:element minOccurs="0" name="NameSupplementCode" type="tns:PersonNameSupplementCode" />
+      <xs:element minOccurs="0" name="NameSupplementName" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviatingFullName" type="xs:string" />
+      <xs:element minOccurs="0" name="NameFormatCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="NameFormatCode" type="tns:PersonNameFormatCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AcademicTitleCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FamilyNamePrefixCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PersonNameSupplementCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PersonNameFormatCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrPostlAddr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressRepresentationCode" type="tns:AddressRepresentationCode" />
+      <xs:element minOccurs="0" name="CountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="RegionCode" type="tns:RegionCode" />
+      <xs:element minOccurs="0" name="CityName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalCityName" type="xs:string" />
+      <xs:element minOccurs="0" name="DistrictName" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetPostalCode" type="xs:token" />
+      <xs:element minOccurs="0" name="POBoxPostalCode" type="xs:token" />
+      <xs:element minOccurs="0" name="CompanyPostalCode" type="xs:token" />
+      <xs:element minOccurs="0" name="StreetPrefixName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalStreetPrefixName" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetName" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetSuffixName" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalStreetSuffixName" type="xs:string" />
+      <xs:element minOccurs="0" name="HouseID" type="xs:token" />
+      <xs:element minOccurs="0" name="AdditionalHouseID" type="xs:token" />
+      <xs:element minOccurs="0" name="BuildingID" type="xs:token" />
+      <xs:element minOccurs="0" name="RoomID" type="xs:token" />
+      <xs:element minOccurs="0" name="FloorID" type="xs:token" />
+      <xs:element minOccurs="0" name="CareOfName" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetAddressMailNonDeliveryReasonCode" type="tns:MailNonDeliveryReasonCode" />
+      <xs:element minOccurs="0" name="POBoxDeviatingCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="POBoxDeviatingRegionCode" type="tns:RegionCode" />
+      <xs:element minOccurs="0" name="POBoxDeviatingCityName" type="xs:string" />
+      <xs:element minOccurs="0" name="POBoxLobbyName" type="xs:string" />
+      <xs:element minOccurs="0" name="POBoxID" type="xs:token" />
+      <xs:element minOccurs="0" name="POBoxAddressMailNonDeliveryReasonCode" type="tns:MailNonDeliveryReasonCode" />
+      <xs:element minOccurs="0" name="POBoxIDVisibleIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="POBoxDeliveryServiceID" type="tns:Identifier" />
+      <xs:element minOccurs="0" name="POBoxDeliveryServiceTypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="TaxJurisdictionCode" type="tns:TaxJurisdictionCode" />
+      <xs:element minOccurs="0" name="TimeZoneCode" type="xs:token" />
+      <xs:element minOccurs="0" name="TransportationZoneID" type="tns:TransportationZoneID" />
+      <xs:element minOccurs="0" name="RegionalStructureElementGroupCode" type="tns:RegionalStructureElementGroupCode" />
+      <xs:element minOccurs="0" name="RegionalStructureAddressConsistencyStatusCode" type="xs:token" />
+      <xs:element minOccurs="0" name="RegionalStructureCityCode" type="tns:RegionalStructureCityCode" />
+      <xs:element minOccurs="0" name="AdditionalRegionalStructureCityCode" type="tns:RegionalStructureCityCode" />
+      <xs:element minOccurs="0" name="POBoxDeviatingRegionalStructureCityCode" type="tns:RegionalStructureCityCode" />
+      <xs:element minOccurs="0" name="RegionalStructureDistrictCode" type="tns:RegionalStructureDistrictCode" />
+      <xs:element minOccurs="0" name="RegionalStructureStreetCode" type="tns:RegionalStructureStreetCode" />
+      <xs:element minOccurs="0" name="ExtendedBuildingID" type="xs:token" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegionCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MailNonDeliveryReasonCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TaxJurisdictionCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TransportationZoneID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" />
+        <xs:attribute name="schemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RegionalStructureElementGroupCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RegionalStructureCityCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RegionalStructureDistrictCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RegionalStructureStreetCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrTel">
+    <xs:sequence>
+      <xs:element name="Number" type="tns:PhoneNumber" />
+      <xs:element minOccurs="0" name="FormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="MobilePhoneNumberIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SMSEnabledIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TelephoneNote" type="tns:BPSUITERplctReqNote" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TelephoneUsage" type="tns:BPSUITERplctReqAddrInfoAddrTelUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="telephoneNoteListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="telephoneUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrTelUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrWeb">
+    <xs:sequence>
+      <xs:element name="URI" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="URITypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WebNote" type="tns:BPSUITERplctReqNote" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WebUsage" type="tns:BPSUITERplctReqAddrInfoAddrWebUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="webNoteListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="webUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqAddrInfoAddrWebUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqBkDets">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:token" />
+      <xs:element minOccurs="0" name="BankDirectoryReference" type="tns:BPSUITERplctReqBkDetsBkDirRef" />
+      <xs:element minOccurs="0" name="BankAccountHolderName" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="BankAccountID" type="xs:token" />
+      <xs:element minOccurs="0" name="BankAccountStandardID" type="xs:token" />
+      <xs:element minOccurs="0" name="SubstituteBusinessPartnerBankDetailsID" type="xs:token" />
+      <xs:element minOccurs="0" name="SubstituteDate" type="xs:date" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="CollectionAuthorisationIndicator" type="xs:string" />
+      <xs:element minOccurs="0" name="BankControlKey" type="tns:Code" />
+      <xs:element minOccurs="0" name="SpecificationsDescription" type="tns:LEN20_Description" />
+      <xs:element minOccurs="0" name="BankAccountExternalID" type="xs:token" />
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="GenericCustomField" type="tns:GenericCustomField" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute ref="tns:genericCustomFieldListCompleteTransmissionIndicator" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqBkDetsBkDirRef">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankStandardID" type="xs:token" />
+      <xs:element minOccurs="0" name="BankCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="BankInternalID" type="tns:BankInternalID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqCom">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="LocationStandardID" type="tns:LocationStandardID" />
+      <xs:element minOccurs="0" name="BusinessPartnerGroupCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="DeletedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReleasedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BlockedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BusinessPartnerAuthorisationGroupCode" type="tns:AuthorisationGroupCode" />
+      <xs:element minOccurs="0" name="KeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalKeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="VerbalCommunicationLanguageCode" type="xs:language" />
+      <xs:element minOccurs="0" name="SalutationText" type="tns:SalutationText" />
+      <xs:element minOccurs="0" name="CorrespondenceBrailleRequiredIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CorrespondenceLargePrintRequiredIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NaturalPersonIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ContactAllowedCode" type="xs:token" />
+      <xs:element minOccurs="0" name="DataOriginTypeCode" type="tns:DataOriginTypeCode" />
+      <xs:element minOccurs="0" name="Person" type="tns:BPSUITERplctReqComPersn" />
+      <xs:element minOccurs="0" name="Organisation" type="tns:BPSUITERplctReqComOrg" />
+      <xs:element minOccurs="0" name="Group" type="tns:BPSUITERplctReqComGrp" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LocationStandardID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeAgencyID" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SalutationText">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="languageCode" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DataOriginTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqComPersn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" type="tns:PersonName" />
+      <xs:element minOccurs="0" name="GenderCode" type="xs:token" />
+      <xs:element minOccurs="0" name="BirthPlaceName" type="xs:string" />
+      <xs:element minOccurs="0" name="BirthDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DeathDate" type="xs:date" />
+      <xs:element minOccurs="0" name="MaritalStatusCode" type="tns:MaritalStatusCode" />
+      <xs:element minOccurs="0" name="NonVerbalCommunicationLanguageCode" type="xs:language" />
+      <xs:element minOccurs="0" name="OccupationCode" type="tns:OccupationCode" />
+      <xs:element minOccurs="0" name="Employer" type="xs:string" />
+      <xs:element minOccurs="0" name="NationalityCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="OriginCountryCode" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MaritalStatusCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OccupationCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqComOrg">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" type="tns:OrganisationName" />
+      <xs:element minOccurs="0" name="CompanyLegalFormCode" type="tns:CompanyLegalFormCode" />
+      <xs:element minOccurs="0" name="LegalEntityTypeCode" type="tns:LegalEntityTypeCode" />
+      <xs:element minOccurs="0" name="FoundationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="LiquidationDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CompanyLegalFormCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LegalEntityTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqComGrp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormOfAddressCode" type="tns:FormOfAddressCode" />
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalName" type="xs:string" />
+      <xs:element minOccurs="0" name="PartnerGroupTypeCode" type="tns:BusinessPartnerPartnerGroupTypeCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessPartnerPartnerGroupTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqRole">
+    <xs:sequence>
+      <xs:element name="RoleCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqIdn">
+    <xs:sequence>
+      <xs:element name="PartyIdentifierTypeCode" type="tns:PartyIdentifierTypeCode" />
+      <xs:element name="BusinessPartnerID" type="xs:token" />
+      <xs:element minOccurs="0" name="IdentifierIssuingAgencyName" type="xs:string" />
+      <xs:element minOccurs="0" name="EntryDate" type="xs:date" />
+      <xs:element minOccurs="0" name="AreaOfValidityCountryCode" type="xs:token" />
+      <xs:element minOccurs="0" name="AreaOfValidityRegionCode" type="tns:RegionCode" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PartyIdentifierTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqIndstrySectr">
+    <xs:sequence>
+      <xs:element name="IndustryClassificationSystemCode" type="tns:IndustryClassificationSystemCode" />
+      <xs:element name="IndustrialSectorCode" type="tns:IndustrialSectorCode" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="IndustryClassificationSystemCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctReqTxNo">
+    <xs:sequence>
+      <xs:element name="CountryCode" type="xs:token" />
+      <xs:element name="TaxIdentificationNumberTypeCode" type="tns:TaxIdentificationNumberTypeCode" />
+      <xs:element name="PartyTaxID" type="tns:PartyTaxID" />
+      <xs:element name="LONG_PartyTaxID" type="tns:LONG_PartyTaxID" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="TaxIdentificationNumberTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PartyTaxID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LONG_PartyTaxID">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="schemeID" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPSUITEBulkRplctConfMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element maxOccurs="unbounded" name="BusinessPartnerSUITEReplicateConfirmationMessage" type="tns:BPSUITERplctConfMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctConfMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element name="BusinessPartner" type="tns:BPSUITERplctConfBP" />
+      <xs:element minOccurs="0" name="Log" type="tns:Log" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctConfBP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="Customer" type="tns:BPSUITERplctConfCust" />
+      <xs:element minOccurs="0" name="Supplier" type="tns:BPSUITERplctConfSuplr" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctConfCust">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="OldReceiverInternalID" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPSUITERplctConfSuplr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="OldReceiverInternalID" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Log">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BusinessDocumentProcessingResultCode" type="xs:token" />
+      <xs:element minOccurs="0" name="MaximumLogItemSeverityCode" type="xs:token" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Item" type="tns:LogItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LogItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TypeID" type="xs:token" />
+      <xs:element minOccurs="0" name="CategoryCode" type="tns:LogItemCategoryCode" />
+      <xs:element minOccurs="0" name="SeverityCode" type="xs:token" />
+      <xs:element minOccurs="0" name="ReferenceObjectNodeSenderTechnicalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReferenceMessageElementName" type="xs:string" />
+      <xs:element name="Note" type="xs:string" />
+      <xs:element minOccurs="0" name="NoteTemplateText" type="xs:string" />
+      <xs:element minOccurs="0" name="LogItemNotePlaceholderSubstitutionList" type="tns:LogItemNotePlaceholderSubstitutionList" />
+      <xs:element minOccurs="0" name="WebURI" type="xs:anyURI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LogItemCategoryCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LogItemNotePlaceholderSubstitutionList">
+    <xs:sequence>
+      <xs:element name="FirstPlaceholderID" type="xs:token" />
+      <xs:element minOccurs="0" name="SecondPlaceholderID" type="xs:token" />
+      <xs:element minOccurs="0" name="ThirdPlaceholderID" type="xs:token" />
+      <xs:element minOccurs="0" name="FourthPlaceholderID" type="xs:token" />
+      <xs:element name="FirstPlaceholderSubstitutionText" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondPlaceholderSubstitutionText" type="xs:string" />
+      <xs:element minOccurs="0" name="ThirdPlaceholderSubstitutionText" type="xs:string" />
+      <xs:element minOccurs="0" name="FourthPlaceholderSubstitutionText" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITEBulkRplctReqMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element maxOccurs="unbounded" name="BusinessPartnerRelationshipSUITEReplicateRequestMessage" type="tns:BPRelshpSUITERplctReqMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element name="BusinessPartnerRelationship" type="tns:BPRelshpSUITERplctReqBPRelshp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqBPRelshp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="BusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="BusinessPartnerExternalID" type="tns:NOCONVERSION_ObjectID" />
+      <xs:element minOccurs="0" name="RelationshipBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="RelationshipBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverRelationshipBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverRelationshipBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="RelationshipBusinessPartnerExternalID" type="tns:NOCONVERSION_ObjectID" />
+      <xs:element minOccurs="0" name="RoleCode" type="tns:MDGBusinessPartnerRelationshipCategoryCode" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ContactPerson" type="tns:BPRelshpSUITERplctReqCntctPersn" />
+      <xs:element minOccurs="0" name="ShareHolder" type="tns:BPRelshpSUITERplctReqShrhldr" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="changeOrdinalNumberValue" type="xs:decimal" />
+    <xs:attribute name="reconciliationPeriodCounterValue" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="MDGBusinessPartnerRelationshipCategoryCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BusinessPartnerFunctionTypeCode" type="tns:BusinessPartnerFunctionTypeCode" />
+      <xs:element minOccurs="0" name="BusinessPartnerFunctionalAreaCode" type="tns:BusinessPartnerFunctionalAreaCode" />
+      <xs:element minOccurs="0" name="PowerOfAttorneyTypeCode" type="tns:PowerOfAttorneyTypeCode" />
+      <xs:element minOccurs="0" name="VIPReasonCode" type="tns:VIPReasonCode" />
+      <xs:element minOccurs="0" name="ContactPersonNote" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WorkplaceAddressInformation" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfo" />
+      <xs:element minOccurs="0" name="CustomerContactPerson" type="tns:BPRelshpSUITERplctReqCustSuplrCntctPersn" />
+      <xs:element minOccurs="0" name="SupplierContactPerson" type="tns:BPRelshpSUITERplctReqCustSuplrCntctPersn" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="workplaceAddressListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BusinessPartnerFunctionTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BusinessPartnerFunctionalAreaCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PowerOfAttorneyTypeCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="VIPReasonCode">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="listID" type="xs:string" />
+        <xs:attribute name="listVersionID" type="xs:string" />
+        <xs:attribute name="listAgencyID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeID" type="xs:string" />
+        <xs:attribute name="listAgencySchemeAgencyID" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressReceiverUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="AddressUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Address" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddr" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CommunicationPreference" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrCommPref" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Email" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrEml" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Facsimile" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrFacs" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Telephone" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrTel" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Web" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWeb" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AddressRepresentationPersonName" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrRpstPersnName" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Workplace" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWplc" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="emailListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="facsimileListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="telephoneListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="webListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="workplaceListCompleteTransmissionIndicator" type="xs:boolean" />
+    <xs:attribute name="addressRepresentationPersonNameListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrCommPref">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PreferredCommunicationMediumTypeCode" type="tns:CommunicationMediumTypeCode" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrEml">
+    <xs:sequence>
+      <xs:element name="URI" type="tns:EmailURI" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="TransportNeutralEncapsulationFormatEnabledIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EmailUsage" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrEmlUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="eMailUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrEmlUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrFacs">
+    <xs:sequence>
+      <xs:element name="Number" type="tns:PhoneNumber" />
+      <xs:element minOccurs="0" name="FormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="FacsimileUsage" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrFacsUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="facsimileUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrFacsUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrTel">
+    <xs:sequence>
+      <xs:element name="Number" type="tns:PhoneNumber" />
+      <xs:element minOccurs="0" name="FormattedNumberDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+      <xs:element minOccurs="0" name="MobilePhoneNumberIndicator" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SMSEnabledIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TelephoneUsage" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrTelUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="telephoneUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrTelUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWeb">
+    <xs:sequence>
+      <xs:element name="URI" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="URITypeCode" type="tns:Code" />
+      <xs:element minOccurs="0" name="UsageDeniedIndicator" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="WebUsage" type="tns:BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWebUsge" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+    <xs:attribute name="webUsageListCompleteTransmissionIndicator" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWebUsge">
+    <xs:sequence>
+      <xs:element name="Usage" type="tns:CommunicationAddressUsage" />
+      <xs:element minOccurs="0" name="DefaultIndicator" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrRpstPersnName">
+    <xs:sequence>
+      <xs:element name="AddressRepresentationCode" type="tns:AddressRepresentationCode" />
+      <xs:element name="Name" type="tns:PersonName" />
+      <xs:element minOccurs="0" name="KeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalKeyWordsText" type="xs:string" />
+      <xs:element minOccurs="0" name="FormattedName" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCntctPersnWplcAddrInfoAddrWplc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressRepresentationCode" type="tns:AddressRepresentationCode" />
+      <xs:element minOccurs="0" name="FunctionalTitleName" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentName" type="xs:string" />
+      <xs:element minOccurs="0" name="BuildingID" type="xs:token" />
+      <xs:element minOccurs="0" name="FloorID" type="xs:token" />
+      <xs:element minOccurs="0" name="RoomID" type="xs:token" />
+      <xs:element minOccurs="0" name="InhouseMailID" type="xs:token" />
+      <xs:element minOccurs="0" name="CorrespondenceShortName" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="actionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqCustSuplrCntctPersn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverInternalID" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctReqShrhldr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EquityParticipationPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="EquityParticipationAmount" type="tns:Amount" />
+      <xs:element minOccurs="0" name="CompanyControlIndicator" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITEBulkRplctConfMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element maxOccurs="unbounded" name="BusinessPartnerRelationshipSUITEReplicateConfirmationMessage" type="tns:BPRelshpSUITERplctConfMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctConfMsg">
+    <xs:sequence>
+      <xs:element name="MessageHeader" type="tns:BusinessDocumentMessageHeader" />
+      <xs:element name="BusinessPartnerRelationship" type="tns:BPRelshpSUITERplctConfBPRelshp" />
+      <xs:element minOccurs="0" name="Log" type="tns:Log" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BPRelshpSUITERplctConfBPRelshp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="BusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="RelatedBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="RelatedBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="ReceiverRelatedBusinessPartnerUUID" type="tns:UUID" />
+      <xs:element minOccurs="0" name="ReceiverRelatedBusinessPartnerInternalID" type="xs:token" />
+      <xs:element minOccurs="0" name="RoleCode" type="tns:MDGBusinessPartnerRelationshipCategoryCode" />
+      <xs:element minOccurs="0" name="ValidityPeriod" type="tns:CLOSED_DatePeriod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExchangeFaultData">
+    <xs:sequence>
+      <xs:element name="faultText" type="xs:string" />
+      <xs:element minOccurs="0" name="faultUrl" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="faultDetail" nillable="true" type="tns:ExchangeLogData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExchangeLogData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="severity" type="xs:string" />
+      <xs:element name="text" type="xs:string" />
+      <xs:element minOccurs="0" name="url" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="GenericCustomFieldType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Code" />
+      <xs:enumeration value="Date" />
+      <xs:enumeration value="Decimal" />
+      <xs:enumeration value="Indicator" />
+      <xs:enumeration value="Text" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="genericCustomFieldListCompleteTransmissionIndicator" type="xs:string" />
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="P3StandardMessageFault">
+    <wsdl:part element="ns1:StandardMessageFault" name="P3StandardMessageFault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PollingClientRequestResponse_Out">
+    <wsdl:part element="tns:PollingRequest" name="PollingRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PollingClientRequestResponse_OutResponse">
+    <wsdl:part element="tns:PollingResponse" name="PollingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PollingClientRequestResponse_Out">
+    <wsdl:operation name="PollingClientRequestResponse_Out">
+      <wsdl:input message="tns:PollingClientRequestResponse_Out" name="PollingClientRequestResponse_Out">
+    </wsdl:input>
+      <wsdl:output message="tns:PollingClientRequestResponse_OutResponse" name="PollingClientRequestResponse_OutResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:P3StandardMessageFault" name="P3StandardMessageFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PollingClientRequestResponse_OutSoapBinding" type="tns:PollingClientRequestResponse_Out">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PollingClientRequestResponse_Out">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" style="document" />
+      <wsdl:input name="PollingClientRequestResponse_Out">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="PollingClientRequestResponse_OutResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="P3StandardMessageFault">
+        <soap:fault name="P3StandardMessageFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PollingClientRequestResponse_Out">
+    <wsdl:port binding="tns:PollingClientRequestResponse_OutSoapBinding" name="PollingRequestEndPointPort">
+      <soap:address location="https://s1-2.ariba.com/SM/soap/PollingService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

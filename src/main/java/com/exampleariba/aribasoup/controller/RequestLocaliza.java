@@ -3,6 +3,9 @@ package com.exampleariba.aribasoup.controller;
 
 import com.exampleariba.aribasoup.config.LocalizaClient;
 import com.exampleariba.aribasoup.config.WSConfigClient;
+import com.exampleariba.aribasoup.configCXF.CXFService;
+import com.exampleariba.aribasoup.configCXF.ClientCxfConfig;
+import com.exampleariba.aribasoup.cxfgerado.suppliermanagement.P3StandardMessageFault;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.localiza.ws.PollingMessage;
 import com.localiza.ws.PollingRequest;
@@ -24,7 +27,12 @@ public class RequestLocaliza {
     @Autowired
     private LocalizaClient localizaClient;
 
-    @PostConstruct
+    @Autowired
+    private CXFService cxfService;
+
+
+
+//    @PostConstruct
     public void iniciar() throws Exception {
         System.out.println("iniciado");
 //        PollingRequest pollingRequest = new PollingRequest();
@@ -45,5 +53,18 @@ public class RequestLocaliza {
 
         System.out.println("sdf");
     }
+
+    @PostConstruct
+    public void buscarAriba() throws P3StandardMessageFault {
+        System.out.println("iniciado");
+
+        cxfService.getLocaliza();
+
+
+
+    }
+
+
+
 
 }

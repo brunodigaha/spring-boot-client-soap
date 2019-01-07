@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<cxf.version>3.2.7</cxf.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--</dependency>-->
 
 
 	<dependency>
@@ -53,34 +63,64 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
+
+			<!-- cxf-codegen-plugin -->
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.14.0</version>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
 				<executions>
 					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${project.basedir}/src/main/resources/schema/wsdl/PollingService.wsdl</wsdl>
+									<wsdlLocation>classpath:wsdl/helloworld.wsdl</wsdlLocation>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
 						<goals>
-							<goal>generate</goal>
+							<goal>wsdl2java</goal>
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<schemaLanguage>WSDL</schemaLanguage>
-					<generatePackage>com.localiza.ws</generatePackage>
-					<!--<schemaDirectory>${project.basedir}/src/main/resources/schema/wsdl/</schemaDirectory>-->
-					<!--<schemaDirectory>\src\main\resources\schema\wsdl</schemaDirectory>-->
-					<!--<schemaIncludes>-->
-					<!--<include>*.wsdl</include>-->
-					<!--</schemaIncludes>-->
-					<!--<schemaFiles>PollingService.wsdl</schemaFiles>-->
-					<!--<clearOutputDir>true</clearOutput>-->
-					<schemas>
-						<schema>
-							<url>https://s1-2.ariba.com/SM/soap/PollingService?wsdl</url>
-						</schema>
-					</schemas>
-				</configuration>
 			</plugin>
+
+
+
+			<!--<plugin>-->
+				<!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+				<!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+				<!--<version>0.14.0</version>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<goals>-->
+							<!--<goal>generate</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+				<!--<configuration>-->
+					<!--<schemaLanguage>WSDL</schemaLanguage>-->
+					<!--<generatePackage>com.localiza.ws</generatePackage>-->
+					<!--&lt;!&ndash;<schemaDirectory>${project.basedir}/src/main/resources/schema/wsdl/</schemaDirectory>&ndash;&gt;-->
+					<!--&lt;!&ndash;<schemaDirectory>\src\main\resources\schema\wsdl</schemaDirectory>&ndash;&gt;-->
+					<!--&lt;!&ndash;<schemaIncludes>&ndash;&gt;-->
+					<!--&lt;!&ndash;<include>*.wsdl</include>&ndash;&gt;-->
+					<!--&lt;!&ndash;</schemaIncludes>&ndash;&gt;-->
+					<!--&lt;!&ndash;<schemaFiles>PollingService.wsdl</schemaFiles>&ndash;&gt;-->
+					<!--&lt;!&ndash;<clearOutputDir>true</clearOutput>&ndash;&gt;-->
+					<!--<schemas>-->
+						<!--<schema>-->
+							<!--<url>https://s1-2.ariba.com/SM/soap/PollingService?wsdl</url>-->
+						<!--</schema>-->
+					<!--</schemas>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
 		</plugins>
 	</build>
 
